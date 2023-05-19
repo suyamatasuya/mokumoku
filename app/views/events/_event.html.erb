@@ -23,7 +23,7 @@
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center gap-3">
           <%= image_tag event.user.decorate.avatar, class: 'avatar-sm rounded-circle' %>
-          <%= event.user.name %>
+          <%= link_to event.user.name, user_path(event.user) %>
         </div>
         <% if logged_in? %>
           <div id="js-event-bookmark-<%= event.id %>">
@@ -31,6 +31,14 @@
               <%= render 'events/bookmarks/unbookmark', event: event %>
             <% else %>
               <%= render 'events/bookmarks/bookmark', event: event %>
+            <% end %>
+          </div>
+          <!-- Follow/Unfollow button -->
+          <div>
+            <% if current_user.following?(event.user) %>
+              <%= button_to 'フォローする', unfollow_user_path(event.user), method: :delete %>
+            <% else %>
+              <%= button_to 'フォローを外す', follow_user_path(event.user) %>
             <% end %>
           </div>
         <% end %>

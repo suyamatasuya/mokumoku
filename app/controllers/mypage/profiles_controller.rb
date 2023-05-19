@@ -6,9 +6,9 @@ class Mypage::ProfilesController < Mypage::BaseController
   end
 
   def update
-    @user = User.find(current_user.id)
+    @user = current_user
     if @user.update(profile_params)
-      redirect_to mypage_profile_path, success: 'プロフィールを更新しました'
+      redirect_to mypage_profile_path, success: 'プロフィールと趣味を更新しました'
     else
       render :show
     end
@@ -17,6 +17,6 @@ class Mypage::ProfilesController < Mypage::BaseController
   private
 
   def profile_params
-    params.require(:user).permit(:name, :avatar)
+    params.require(:user).permit(:name, :avatar, :profile, :hobby)
   end
 end

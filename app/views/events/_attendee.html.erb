@@ -1,6 +1,16 @@
 <li>
   <div class="d-flex align-items-center gap-2 mb-3">
     <%= image_tag attendee.decorate.avatar, class: 'rounded-circle avatar-md' %>
-    <%= attendee.name %>
+    <%= link_to attendee.name, user_path(attendee) %>
+    
+    <% if logged_in? && current_user != attendee %>
+      <div class="mt-2">
+        <% if current_user.following?(attendee) %>
+          <%= button_to 'Unfollow', unfollow_user_path(attendee), method: :delete, class: 'btn btn-primary' %>
+        <% else %>
+          <%= button_to 'Follow', follow_user_path(attendee), method: :post, class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </li>

@@ -28,7 +28,6 @@
       <p class="mb-4">
         Edit your personal information and address.
       </p>
-      <!-- Form -->
       <%= form_with(model: @user, url: mypage_profile_path) do |f| %>
         <div class="mb-3">
           <%= f.label :email, class: 'form-label' %>
@@ -37,11 +36,20 @@
         <div class="mb-3">
           <%= f.label :name, class: 'form-label' %>
           <%= f.text_field :name, class: 'form-control', placeholder: 'らんてくん' %>
+         </div>
+
+        <div class="mb-3">
+          <%= f.label :profile, class: 'form-label' %>
+          <%= f.text_area :profile, class: 'form-control', placeholder: 'Profile' %>
         </div>
-        <div class="col-12">
-          <!-- Button -->
-          <%= f.submit class: 'btn btn-primary' %>
+        <div class="mb-3">
+          <%= f.label :hobby, class: 'form-label' %>
+          <%= f.text_area :hobby, class: 'form-control', placeholder: 'Hobby' %>
         </div>
+
+          <div class="col-12">
+            <%= f.submit '更新する', class: 'btn btn-primary' %>
+          </div>
       <% end %>
     </div>
   </div>
